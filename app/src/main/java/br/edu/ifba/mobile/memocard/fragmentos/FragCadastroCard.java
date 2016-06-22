@@ -1,7 +1,8 @@
 package br.edu.ifba.mobile.memocard.fragmentos;
 
 import android.annotation.TargetApi;
-import android.app.Fragment;
+//import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,8 +17,9 @@ import br.edu.ifba.mobile.memocard.R;
 import br.edu.ifba.mobile.memocard.tarefas.GravacaoCard;
 
 /**
- * Created by andre on 20/06/2016.
+ * Created by André Sobreira on 20/06/2016.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class FragCadastroCard extends Fragment {
 
     private static FragCadastroCard instancia = null;
@@ -32,6 +34,7 @@ public class FragCadastroCard extends Fragment {
     private View tela = null;
     private EditText frente = null;
     private EditText verso = null;
+    @SuppressWarnings("FieldCanBeLocal")
     private Button botaoSalvar = null;
     private Card card = null;
 

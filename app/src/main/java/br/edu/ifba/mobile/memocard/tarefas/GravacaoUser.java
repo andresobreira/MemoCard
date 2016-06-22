@@ -4,37 +4,37 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import br.edu.ifba.mobile.memocard.BD.Card;
 import br.edu.ifba.mobile.memocard.BD.FachadaBD;
+import br.edu.ifba.mobile.memocard.BD.User;
 
 /**
  * Created by André Sobreira on 21/06/2016.
  */
-public class GravacaoCard extends AsyncTask<Void, Void, String> {
+public class GravacaoUser extends AsyncTask<Void, Void, String> {
 
     private Context contexto = null;
-    private Card card = null;
+    private User user = null;
 
-    public GravacaoCard (Context contexto, Card card){
+    public GravacaoUser(Context contexto, User user) {
         this.contexto = contexto;
-        this.card = card;
+        this.user = user;
     }
 
     @Override
     protected String doInBackground(Void... voids) {
         String mensagem;
         long codigo;
-        if(card.getCodigo() == -1){
-            codigo = FachadaBD.getInstancia().inserir(card);
+        if(user.getCodigo() == -1){
+            codigo = FachadaBD.getInstancia().inserir(user);
         }
         else{
-            codigo = FachadaBD.getInstancia().atualizar(card);
+            codigo = FachadaBD.getInstancia().atualizar(user);
         }
         if(codigo > 0){
-            mensagem = "Yeah! Card salvo!";
+            mensagem = "Yeah! Já guardamos seus dados!";
         }
         else{
-            mensagem = "Oops! O card não foi salvo!";
+            mensagem = "Oops! Não conseguimos salvar!";
         }
         return mensagem;
     }

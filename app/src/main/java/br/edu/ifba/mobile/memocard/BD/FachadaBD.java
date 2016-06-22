@@ -1,5 +1,6 @@
 package br.edu.ifba.mobile.memocard.BD;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by andre on 20/06/2016.
+ * Created by André Sobreira on 20/06/2016.
  */
 public class FachadaBD extends SQLiteOpenHelper {
 
@@ -27,12 +28,12 @@ public class FachadaBD extends SQLiteOpenHelper {
         return instancia;
     }
 
-    private static String NOME_BANCO = "MemoCard";
-    private static int VERSAO_BANCO = 1;
-    public FachadaBD(Context context) { super(context, NOME_BANCO, null, VERSAO_BANCO); }// construtor
+    private static final String NOME_BANCO = "MemoCard";
+    private static final int VERSAO_BANCO = 1;
+    private FachadaBD(Context context) { super(context, NOME_BANCO, null, VERSAO_BANCO); }// construtor
 
-    private static String CREATE_TABLE_CARDS="CREATE TABLE CARDS(codigo INTEGER PRIMARY KEY AUTOINCREMENT, frente TEXT, verso TEXT)";
-    private static String CREATE_TABLE_USER="CREATE TABLE USER(codigo INTEGER PRIMARY KEY AUTOINCREMENT, aluno TEXT, professor TEXT, escola TEXT, serie TEXT, materia TEXT, turno TEXT";
+    private static final String CREATE_TABLE_CARDS="CREATE TABLE CARDS(codigo INTEGER PRIMARY KEY AUTOINCREMENT, frente TEXT, verso TEXT)";
+    private static final String CREATE_TABLE_USER="CREATE TABLE USER(codigo INTEGER PRIMARY KEY AUTOINCREMENT, aluno TEXT, professor TEXT, escola TEXT, serie TEXT, materia TEXT, turno TEXT";
 
     @Override
     public void onCreate(SQLiteDatabase db) { // criacao da tabela CARDS
@@ -69,16 +70,15 @@ public class FachadaBD extends SQLiteOpenHelper {
 
     public int remover(Card card) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         return db.delete("CARDS", "CODIGO = " + card.getCodigo(), null);//delete from CARDS where CODIGO = 'x'
     }
 
     public List<Card> listarCards() {
-        List<Card> cards = new ArrayList<Card>();
+        List<Card> cards = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String selecao = "select CODIGO, FRENTE,VERSO from CARDS";
 
-        Cursor cursor = db.rawQuery(selecao, null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(selecao, null);
         if(cursor != null){
             boolean temProximo = cursor.moveToFirst();
             while (temProximo){
@@ -99,13 +99,14 @@ public class FachadaBD extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues valores = new ContentValues();
 
-        valores.put("ALUNO", usuario.getAluno());
-        valores.put("PROFESSOR", usuario.getProfessor());
-        valores.put("ESCOLA", usuario.getEscola());
-        valores.put("SERIE", usuario.getSerie());
-        valores.put("MATERIA", usuario.getMateria());
-        valores.put("TURNO", usuario.getTurno());
-
+        if(usuario.getCodigo() == -1) {
+            valores.put("ALUNO", usuario.getAluno());
+            valores.put("PROFESSOR", usuario.getProfessor());
+            valores.put("ESCOLA", usuario.getEscola());
+            valores.put("SERIE", usuario.getSerie());
+            valores.put("MATERIA", usuario.getMateria());
+            valores.put("TURNO", usuario.getTurno());
+        }
         long insert = db.insert("USER", null, valores);
         return insert;
     }
@@ -125,33 +126,27 @@ public class FachadaBD extends SQLiteOpenHelper {
         return update;
     }
 
-    public int remover(User usuario) {
-        SQLiteDatabase db = this.getWritableDatabase();
+// --Commented out by Inspection START (21/06/2016 23:58):
+//    public int remover(User usuario) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        return db.delete("USER", "CODIGO = " + usuario.getCodigo(), null);
+//    }
+// --Commented out by Inspection STOP (21/06/2016 23:58)
 
-        return db.delete("USER", "CODIGO = " + usuario.getCodigo(), null);
-    }
-
-    public List<User> listarUsuarios() {
-        List<User> users = new ArrayList<User>();
+    public User listarUsuarios() {
+        User usuario = new User();
         SQLiteDatabase db = this.getReadableDatabase();
         String selecao = "select * from USER";
-
-        Cursor cursor = db.rawQuery(selecao, null);
-        if(cursor != null){
-            boolean temProximo = cursor.moveToFirst();
-            while (temProximo){
-                User usuario = new User();
-                usuario.setCodigo(cursor.getLong(cursor.getColumnIndex("CODIGO")));
-                usuario.setAluno(cursor.getString(cursor.getColumnIndex("ALUNO")));
-                usuario.setProfessor(cursor.getString(cursor.getColumnIndex("PROFESSOR")));
-                usuario.setEscola(cursor.getString(cursor.getColumnIndex("ESCOLA")));
-                usuario.setSerie(cursor.getString(cursor.getColumnIndex("SERIE")));
-                usuario.setMateria(cursor.getString(cursor.getColumnIndex("MATERIA")));
-                usuario.setTurno(cursor.getString(cursor.getColumnIndex("TURNO")));
-                users.add(usuario);
-                temProximo = cursor.moveToNext();
-            }
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(selecao, null);
+        if (cursor != null) {
+            usuario.setCodigo(cursor.getLong(cursor.getColumnIndex("CODIGO")));
+            usuario.setAluno(cursor.getString(cursor.getColumnIndex("ALUNO")));
+            usuario.setProfessor(cursor.getString(cursor.getColumnIndex("PROFESSOR")));
+            usuario.setEscola(cursor.getString(cursor.getColumnIndex("ESCOLA")));
+            usuario.setSerie(cursor.getString(cursor.getColumnIndex("SERIE")));
+            usuario.setMateria(cursor.getString(cursor.getColumnIndex("MATERIA")));
+            usuario.setTurno(cursor.getString(cursor.getColumnIndex("TURNO")));
         }
-        return users;
+        return usuario;
     }
 }

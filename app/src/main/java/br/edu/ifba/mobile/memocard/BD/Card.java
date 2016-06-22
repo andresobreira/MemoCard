@@ -1,7 +1,7 @@
 package br.edu.ifba.mobile.memocard.BD;
 
 /**
- * Created by andre on 20/06/2016.
+ * Created by André Sobreira on 20/06/2016.
  */
 public class Card {
 

@@ -10,31 +10,28 @@ import br.edu.ifba.mobile.memocard.BD.FachadaBD;
 /**
  * Created by André Sobreira on 21/06/2016.
  */
-public class GravacaoCard extends AsyncTask<Void, Void, String> {
+public class RemocaoCard extends AsyncTask<Void, Void, String> {
 
     private Context contexto = null;
     private Card card = null;
 
-    public GravacaoCard (Context contexto, Card card){
-        this.contexto = contexto;
+    public RemocaoCard(Context contexto, Card card){
         this.card = card;
+        this.contexto = contexto;
     }
 
     @Override
     protected String doInBackground(Void... voids) {
         String mensagem;
-        long codigo;
-        if(card.getCodigo() == -1){
-            codigo = FachadaBD.getInstancia().inserir(card);
+        if(card.getCodigo() != -1){
+            if(FachadaBD.getInstancia().remover(card) == 0){
+                mensagem = "Oops! não conseguimos remover.";
+            } else {
+                mensagem = "Seu card foi apagado.";
+            }
         }
-        else{
-            codigo = FachadaBD.getInstancia().atualizar(card);
-        }
-        if(codigo > 0){
-            mensagem = "Yeah! Card salvo!";
-        }
-        else{
-            mensagem = "Oops! O card não foi salvo!";
+        else {
+            mensagem = "Dica: escolha um card primeiro!";
         }
         return mensagem;
     }
