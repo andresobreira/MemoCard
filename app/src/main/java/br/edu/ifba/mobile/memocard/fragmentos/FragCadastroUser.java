@@ -11,15 +11,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import br.edu.ifba.mobile.memocard.R;
 import br.edu.ifba.mobile.memocard.BD.FachadaBD;
 import br.edu.ifba.mobile.memocard.BD.User;
-import br.edu.ifba.mobile.memocard.R;
 import br.edu.ifba.mobile.memocard.tarefas.GravacaoUser;
 
 /**
  * Created by André Sobreira on 21/06/2016.
  */
-public class FragCadastroUser extends Fragment {
+public class FragCadastroUser  extends Fragment {
 
     private static FragCadastroUser instancia = null;
 
@@ -37,7 +37,6 @@ public class FragCadastroUser extends Fragment {
     private EditText serie = null;
     private EditText materia = null;
     private EditText turno = null;
-    @SuppressWarnings("FieldCanBeLocal")
     private Button botaoSalvar = null;
     private User user = null;
 

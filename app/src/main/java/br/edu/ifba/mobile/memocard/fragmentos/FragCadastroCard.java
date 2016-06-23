@@ -1,10 +1,9 @@
 package br.edu.ifba.mobile.memocard.fragmentos;
 
 import android.annotation.TargetApi;
-//import android.app.Fragment;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +53,7 @@ public class FragCadastroCard extends Fragment {
             @Override
             public void onClick(View view) {
                 GravacaoCard gravacao = new GravacaoCard(getContexto(), getCard());
-                    gravacao.execute();
+                gravacao.execute();
             }
         });
     }
@@ -66,13 +65,12 @@ public class FragCadastroCard extends Fragment {
 
     private Card getCard(){
         card.setFrente(frente.getText().toString());
-        card.setFrente(verso.getText().toString());
+        card.setVerso(verso.getText().toString());
         return card;
     }
 
     public void exibirCardSelecionado(){
         card = FragListaCards.getInstancia().getCardSelecionado();
-
         if(card.getCodigo() == -1){
             limparCampos();
         } else
@@ -90,3 +88,4 @@ public class FragCadastroCard extends Fragment {
     }
 
 }
+

@@ -31,7 +31,7 @@ public class GravacaoUser extends AsyncTask<Void, Void, String> {
             codigo = FachadaBD.getInstancia().atualizar(user);
         }
         if(codigo > 0){
-            mensagem = "Yeah! Já guardamos seus dados!";
+            mensagem = "Yeah! Já guardamos os seus dados!";
         }
         else{
             mensagem = "Oops! Não conseguimos salvar!";

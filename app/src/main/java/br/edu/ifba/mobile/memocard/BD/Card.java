@@ -1,5 +1,6 @@
 package br.edu.ifba.mobile.memocard.BD;
 
+
 /**
  * Created by André Sobreira on 20/06/2016.
  */
@@ -28,5 +29,10 @@ public class Card {
     }
     public void setVerso(String verso) {
         this.verso = verso;
+    }
+
+    @Override
+    public String toString() {
+        return frente;
     }
 }

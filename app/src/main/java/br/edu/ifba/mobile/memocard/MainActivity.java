@@ -1,25 +1,25 @@
 package br.edu.ifba.mobile.memocard;
 
-import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.view.View;
 
 import br.edu.ifba.mobile.memocard.BD.FachadaBD;
+import br.edu.ifba.mobile.memocard.R;
 import br.edu.ifba.mobile.memocard.fragmentos.FragCadastroCard;
+import br.edu.ifba.mobile.memocard.fragmentos.FragCadastroUser;
 import br.edu.ifba.mobile.memocard.fragmentos.FragInfos;
 import br.edu.ifba.mobile.memocard.fragmentos.FragListaCards;
 
-/**
- * Created by André Sobreira on 21/06/2016.
- */
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         });
         paginador.addOnPageChangeListener(this);
         FachadaBD.criarInstancia(this.getApplicationContext());
-
     }
 
     @Override
@@ -70,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             FragListaCards.getInstancia().atualizar();
         } else if (position == 2) {
             FragCadastroCard.getInstancia().exibirCardSelecionado();
+        } else if (position == 3) {
+            FragCadastroUser.getInstancia().exibirUsuario();
         }
     }
 
@@ -96,25 +97,29 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 case 2:
                     frag = FragCadastroCard.getInstancia();
                     break;
+                case 3:
+                    frag = FragCadastroUser.getInstancia();
+                    break;
             }
             return frag;
         }
 
         @Override
-        public int getCount() {
-            // Show 3 total pages.
-            return 3;
+        public int getCount() { // Show 4 total pages.
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Informações";
+                    return "Infos";
                 case 1:
                     return "Cards";
                 case 2:
-                    return "Cadastro Cards";
+                    return "Inserir Card";
+                case 3:
+                    return "Seus Dados";
             }
             return null;
         }
