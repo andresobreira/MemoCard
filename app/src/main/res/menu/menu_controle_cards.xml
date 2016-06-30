@@ -7,4 +7,9 @@
         android:orderInCategory="100"
         android:title="Apagar Card"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/revisar_card"
+        android:orderInCategory="100"
+        android:title="Revisar card"
+        app:showAsAction="never"/>
 </menu>

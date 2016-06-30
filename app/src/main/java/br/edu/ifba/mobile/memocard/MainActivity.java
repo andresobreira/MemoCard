@@ -1,24 +1,23 @@
 package br.edu.ifba.mobile.memocard;
 
-import android.support.design.widget.TabLayout;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import br.edu.ifba.mobile.memocard.BD.FachadaBD;
-import br.edu.ifba.mobile.memocard.R;
 import br.edu.ifba.mobile.memocard.fragmentos.FragCadastroCard;
 import br.edu.ifba.mobile.memocard.fragmentos.FragCadastroUser;
 import br.edu.ifba.mobile.memocard.fragmentos.FragInfos;
 import br.edu.ifba.mobile.memocard.fragmentos.FragListaCards;
+import br.edu.ifba.mobile.memocard.fragmentos.FragRevisarCard;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
@@ -71,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             FragCadastroCard.getInstancia().exibirCardSelecionado();
         } else if (position == 3) {
             FragCadastroUser.getInstancia().exibirUsuario();
+        } else if (position == 4) {
+            FragRevisarCard.getInstancia().exibirCardSelecionado();
         }
     }
 
@@ -100,13 +101,16 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 case 3:
                     frag = FragCadastroUser.getInstancia();
                     break;
+                case 4:
+                    frag = FragRevisarCard.getInstancia();
+                    break;
             }
             return frag;
         }
 
         @Override
         public int getCount() { // Show 4 total pages.
-            return 4;
+            return 5;
         }
 
         @Override
@@ -120,6 +124,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                     return "Inserir Card";
                 case 3:
                     return "Seus Dados";
+                case 4:
+                    return "Revisar Card";
             }
             return null;
         }

@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import br.edu.ifba.mobile.memocard.BD.Card;
 import br.edu.ifba.mobile.memocard.BD.FachadaBD;
+import br.edu.ifba.mobile.memocard.fragmentos.FragCadastroCard;
 
 /**
  * Created by André Sobreira on 21/06/2016.

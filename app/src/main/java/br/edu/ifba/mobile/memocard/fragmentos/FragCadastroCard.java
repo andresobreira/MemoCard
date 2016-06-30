@@ -54,6 +54,8 @@ public class FragCadastroCard extends Fragment {
             public void onClick(View view) {
                 GravacaoCard gravacao = new GravacaoCard(getContexto(), getCard());
                 gravacao.execute();
+                //TODO verificar a limpagem dos campos após inserção do card.
+                limparCampos();
             }
         });
     }

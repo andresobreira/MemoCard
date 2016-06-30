@@ -2,8 +2,8 @@ package br.edu.ifba.mobile.memocard.fragmentos;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,6 +34,7 @@ public class FragListaCards extends Fragment {
 
     private View tela = null;
     private ListView lista = null;
+    private int posicao = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflador, ViewGroup vgrupo, Bundle bundle){
@@ -75,13 +76,39 @@ public class FragListaCards extends Fragment {
         listagem.execute();
     }
 
+    public int getPosicao(){
+        return posicao;
+    }
+
     public Card getCardSelecionado(){
         Card card = new Card();
-        int posicao = lista.getCheckedItemPosition();
+        posicao = lista.getCheckedItemPosition();
         if (posicao != ListView.INVALID_POSITION){
             card = (Card) lista.getItemAtPosition(posicao);
         }
         return card;
+    }
+
+    public Card getCardAnterior(){
+        Card card = (Card) lista.getItemAtPosition(posicao-1);
+        if (posicao >=0 && card!=null){
+            posicao--;
+            return card;
+        }else {
+            card = new Card();
+            return card;
+        }
+    }
+
+    public Card getCardProximo(){
+        Card card = (Card) lista.getItemAtPosition(posicao+1);
+        if (card!=null){
+            posicao++;
+            return card;
+        }else {
+            card = new Card();
+            return card;
+        }
     }
 
 }
