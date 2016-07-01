@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import br.edu.ifba.mobile.memocard.BD.Card;
 import br.edu.ifba.mobile.memocard.R;
+import br.edu.ifba.mobile.memocard.tarefas.ContagemRevisoes;
 
 /**
  * Created by André Sobreira on 30/06/2016.
@@ -62,6 +63,9 @@ public class FragRevisarCard extends Fragment {
             @Override
             public void onClick(View view) {
                 verso.setText(card.getVerso());
+                card.setNumRevisoes(card.getNumRevisoes()+1);
+                ContagemRevisoes contagem = new ContagemRevisoes(getContext(), card);
+                contagem.execute();
             }
         });
     }

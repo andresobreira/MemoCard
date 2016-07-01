@@ -69,11 +69,12 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         } else if (position == 2) {
             FragCadastroCard.getInstancia().exibirCardSelecionado();
         } else if (position == 3) {
-            FragCadastroUser.getInstancia().exibirUsuario();
-        } else if (position == 4) {
             FragRevisarCard.getInstancia().exibirCardSelecionado();
+        } else if (position == 4) {
+            FragCadastroUser.getInstancia().exibirUsuario();
         }
     }
+
 
     @Override
     public void onPageScrollStateChanged(int state) {
@@ -99,10 +100,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                     frag = FragCadastroCard.getInstancia();
                     break;
                 case 3:
-                    frag = FragCadastroUser.getInstancia();
+                    frag = FragRevisarCard.getInstancia();
                     break;
                 case 4:
-                    frag = FragRevisarCard.getInstancia();
+                    frag = FragCadastroUser.getInstancia();
                     break;
             }
             return frag;
@@ -119,13 +120,13 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 case 0:
                     return "Infos";
                 case 1:
-                    return "Cards";
+                    return "Meus Cards";
                 case 2:
-                    return "Inserir Card";
+                    return "Criar/Editar";
                 case 3:
-                    return "Seus Dados";
+                    return "Revisar";
                 case 4:
-                    return "Revisar Card";
+                    return "Meus Dados";
             }
             return null;
         }

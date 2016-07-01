@@ -76,10 +76,6 @@ public class FragListaCards extends Fragment {
         listagem.execute();
     }
 
-    public int getPosicao(){
-        return posicao;
-    }
-
     public Card getCardSelecionado(){
         Card card = new Card();
         posicao = lista.getCheckedItemPosition();
@@ -90,23 +86,25 @@ public class FragListaCards extends Fragment {
     }
 
     public Card getCardAnterior(){
-        Card card = (Card) lista.getItemAtPosition(posicao-1);
-        if (posicao >=0 && card!=null){
+        int temp = lista.getFirstVisiblePosition();
+        if (posicao-1 >=temp){
+            Card card = (Card) lista.getItemAtPosition(posicao-1);
             posicao--;
             return card;
         }else {
-            card = new Card();
+            Card card = new Card();
             return card;
         }
     }
 
     public Card getCardProximo(){
-        Card card = (Card) lista.getItemAtPosition(posicao+1);
-        if (card!=null){
+        int temp = lista.getLastVisiblePosition();
+        if(posicao+1 <= temp) {
+            Card card = (Card) lista.getItemAtPosition(posicao+1);
             posicao++;
             return card;
-        }else {
-            card = new Card();
+        } else {
+            Card card = new Card();
             return card;
         }
     }

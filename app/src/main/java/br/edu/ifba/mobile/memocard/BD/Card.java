@@ -1,4 +1,5 @@
-package br.edu.ifba.mobile.memocard.BD;
+﻿package br.edu.ifba.mobile.memocard.BD;
+
 
 
 /**
@@ -9,6 +10,7 @@ public class Card {
     private long codigo = -1;
     private String frente;
     private String verso;
+    private int numRevisoes = 0;
 
     //getters and setters:
 
@@ -30,9 +32,15 @@ public class Card {
     public void setVerso(String verso) {
         this.verso = verso;
     }
+    public int getNumRevisoes() {
+        return numRevisoes;
+    }
+    public void setNumRevisoes(int numRevisoes){
+        this.numRevisoes=numRevisoes;
+    }
 
     @Override
     public String toString() {
-        return frente;
+        return frente+" | revisões: "+numRevisoes;
     }
 }

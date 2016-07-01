@@ -1,15 +1,14 @@
 package br.edu.ifba.mobile.memocard.BD;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by André Sobreira on 20/06/2016.
@@ -33,7 +32,7 @@ public class FachadaBD extends SQLiteOpenHelper {
 	private static final int VERSAO_BANCO = 1;
 	private FachadaBD(Context context) { super(context, NOME_BANCO, null, VERSAO_BANCO); }
 
-	private static final String CREATE_TABLE_CARDS="CREATE TABLE IF NOT EXISTS CARDS (CODIGO INTEGER PRIMARY KEY AUTOINCREMENT, FRENTE TEXT, VERSO TEXT);";
+	private static final String CREATE_TABLE_CARDS="CREATE TABLE IF NOT EXISTS CARDS (CODIGO INTEGER PRIMARY KEY AUTOINCREMENT, FRENTE TEXT, VERSO TEXT, NUMREVISOES INTEGER);";
 	private static final String CREATE_TABLE_USER="CREATE TABLE IF NOT EXISTS USER (CODIGO INTEGER PRIMARY KEY AUTOINCREMENT, ALUNO TEXT, PROFESSOR TEXT, ESCOLA TEXT, SERIE TEXT, MATERIA TEXT, TURNO TEXT);";
 
 	@Override
@@ -78,7 +77,7 @@ public class FachadaBD extends SQLiteOpenHelper {
 		List<Card> cards = new ArrayList<>();
 		SQLiteDatabase db = this.getReadableDatabase();
 
-		String selecao = "SELECT CODIGO, FRENTE, VERSO FROM CARDS";
+		String selecao = "SELECT CODIGO, FRENTE, VERSO, NUMREVISOES FROM CARDS";
 		@SuppressLint("Recycle") Cursor cursor = db.rawQuery(selecao, null);
 		if(cursor != null){
 			boolean temProximo = cursor.moveToFirst();
@@ -87,11 +86,22 @@ public class FachadaBD extends SQLiteOpenHelper {
 				card.setCodigo(cursor.getLong(cursor.getColumnIndex("CODIGO")));
 				card.setFrente(cursor.getString(cursor.getColumnIndex("FRENTE")));
 				card.setVerso(cursor.getString(cursor.getColumnIndex("VERSO")));
+				card.setNumRevisoes(cursor.getInt(cursor.getColumnIndex("NUMREVISOES")));
 				cards.add(card);
 				temProximo = cursor.moveToNext();
 			}
 		}
 		return cards;
+	}
+
+	public long contarRevisoes(Card card){
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues valores = new ContentValues();
+
+		valores.put("NUMREVISOES", card.getNumRevisoes());
+
+		long update = db.update("CARDS", valores, "CODIGO = " + card.getCodigo(), null);
+		return update;
 	}
 
 	// METODOS CRUD User:
