@@ -57,7 +57,6 @@ public class FragListaCards extends Fragment {
             if (id == R.id.cadastro_remover){
                 RemocaoCard remocao = new RemocaoCard(this.getContext(), this.getCardSelecionado());
                 remocao.execute();
-                atualizar();
             }
         }
         return super.onOptionsItemSelected(item);

@@ -1,12 +1,8 @@
 package br.edu.ifba.mobile.memocard.tarefas;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.os.AsyncTask;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -40,7 +36,6 @@ public class ListagemCard extends AsyncTask<Void, Void, List<Card>> {
             Toast.makeText(contexto, "Nenhum card anotado... ainda!", Toast.LENGTH_SHORT).show();
         }
         else{
-            //ArrayAdapter<Card> adaptador = new ArrayAdapter<Card>(contexto, android.R.layout.simple_list_item_single_choice, cards);
             listaCards.setAdapter(new ArrayAdapter<>(contexto, android.R.layout.simple_list_item_single_choice, cards));
         }
     }

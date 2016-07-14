@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import br.edu.ifba.mobile.memocard.BD.Card;
 import br.edu.ifba.mobile.memocard.BD.FachadaBD;
+import br.edu.ifba.mobile.memocard.fragmentos.FragListaCards;
 
 /**
  * Created by André Sobreira on 21/06/2016.
@@ -38,5 +39,6 @@ public class RemocaoCard extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPostExecute(String mensagem){
         Toast.makeText(contexto, mensagem, Toast.LENGTH_LONG).show();
+        FragListaCards.getInstancia().atualizar();
     }
 }
